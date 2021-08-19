@@ -1,0 +1,33 @@
+Intro:
+------
+
+1. Classes are data types which have functions, of their own.
+   Object is a variable of class.
+2. Array type based programming becomes cumbersome.
+3. Common methods could Inherited, thus saving code rewriting.
+                        ----------
+Constructors:
+-------------
+1. Same name as class.
+2. Does intialization code.
+
+Encapsulation:
+--------------
+Puts related data and functions together.
+
+Private members could not be accessed outside the class.
+The essence of them is performing sanitization checks on class variables.
+As through members it could be processed pre emptively.
+
+Abstraction:
+-----------
+Hiding internal details.
+
+Polymorphism:
+-------------
+1. Same name but diff fnl signature.
+    Static : Default arguments.
+    Dynamic: Overriding in inherited classes.
+             Virtual Functions.
+             Function call varies depending on the caller class.
+

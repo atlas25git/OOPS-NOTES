@@ -1,0 +1,55 @@
+Static Members:
+---------------
+
+1) These could be static data members or statc functions.
+
+Static Variables:
+-----------------
+1) Created once and shared all across the objects of the classes.
+
+class Player{
+    public:
+        static int count;
+        Player(){count++;}
+        ~Player(){count--;}
+};
+
+int Player :: count = 0;
+
+int main()
+{
+    Player p1;
+    cout << Player :: count << " ";
+    Player p2;
+    cout << Player :: count << " ";
+    
+    return 0;
+}
+
+Static Member Functions:
+------------------------
+1. Usually to control static data members, without any explicit dependency on  the object.
+   Could be called without the object.
+2. Demonstrated as > cout << Player :: getCount() << " ";
+3. Do not have this pointer, as they are used for objects specifically.
+4. Non static members can access the static data however the static ones are not allowed to access non 
+   static data members.
+
+class Player{
+    public:
+        static int count;
+        Player(){count++;}
+        ~Player(){count--;}
+        static int getCount(){return count;}
+        
+};
+
+int Player :: count = 0;
+
+int main()
+{
+    Player p1, p2;
+    cout << Player :: getCount() << " ";
+    
+    return 0;
+}

@@ -1,0 +1,35 @@
+Inheritance:
+-----------
+
+1. Common code kept in one class and then subsequently things built over this.
+
+class Person
+{
+    protected:
+        string name;
+        int id;
+    public:
+        Person(string n, int i){
+            name = n;
+            id = i;
+        }
+};
+
+class Student : public Person
+{
+    private:
+        int marks;
+    public:
+        Student(string n, int i, int m): Person(n, i),marks(m){
+           
+        }void print(){
+            cout << name << " " << id << " " << marks << endl;
+        };
+};
+  
+2. Access specifiers: 
+2.1 Protected means that members of the class are only accessible in the classes inheriting from it.
+2.2 When the sub class is called it implicitly calls for  the super class first and then does the additional build up.
+     public : protected and public of base class remain as they are.
+     private: everything becomes private
+     protected: private remains private else everything protected.

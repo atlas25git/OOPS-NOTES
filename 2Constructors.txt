@@ -1,0 +1,144 @@
+ //Introduction:
+1. Functions having same name as the class and  without any return type.
+2. Called everytime an object is instantiated.
+3. If not explicitly added, classes create implicitly a constructor.
+4. Class members accessed through the objects using '.' operator.
+   But if created on heap and thus pointed by a pointer, then members accessed using '->'.
+
+   solution a; a.ans();
+   solution* a = new solution(); a->ans();
+
+Classes vs Intializer list:
+---------------------------
+1. Intializer list should be preferred due to performance incentives.
+
+class Point{
+    private:
+        int x, y;
+    public:
+        Point() : x(0), y(0){
+           
+        }
+        Point(int x1, int y1) : x(x1), y(y1){
+            
+        }
+        void print(){
+            cout << x << " " << y << endl;
+        }
+};
+
+2. Class members are first intialized with some random value and then the constructor of the class
+   is executed, thus in effect doing the initalization work twice, this however could be circumvented
+   by the use of intializer list.
+
+class Test{
+    public:
+        Test(){cout << "Default\n"; }
+        Test(int x){cout << "Parameterised\n"; }
+};
+
+class Main{
+    Test t;
+    public:
+        Main(): t(10){
+            
+        }
+};
+
+3. In the program above the class member t is now intialized only once using the intializer list.
+4. Than before when work happened twice.
+5. Earlier once the object t was intialized using the default constructor, and then from the constructor of main class
+   it's default constructor called for intialized cons of test, thus redundant work.
+
+Copy Constructor:
+-----------------
+1) Called when we create an object from an existing object.
+
+2) The implcit desire to create an extraneous copy constructor:
+    1) By default the default copy costructor is created, but this doesn't serve the purpose.
+    2) Only shallow copy is one, that is for the members of the class which have dynamically allocated memory,
+       only the pointer values are copied hence no new memory allocated.
+    
+
+
+class Test{
+    int *ptr;
+    public:
+        Test(int x){
+            ptr = new int(x); 
+        }
+        void set(int x){
+            *ptr = x;
+        }
+        void print(){
+            cout << *ptr << " ";
+        }
+};
+
+int main()
+{
+    Test t1(10);
+    Test t2(t1); // test t2 = t1;
+    t2.set(20);
+    t1.print();
+    t2.print();
+    return 0;
+}
+
+Test t1; //default constructor called
+t2 = t2; // Ass. operator called.
+
+3) Writing a custom copy constructor:
+
+class Test{
+    int *ptr;
+    public:
+        Test(int x){
+            ptr = new int(x); 
+        }
+        //Custom copy constructor.
+        -------------------------- 
+        Test(const Test &t)
+        //Recieves reference as argument so not to get into non terminating cycle of copy constructor calls.
+        //Which gets triggered on object being passed.
+        {
+            int val = *(t.ptr);
+            ptr = new int (val);
+        }
+        void set(int x){
+            *ptr = x;
+        }
+        void print(){
+            cout << *ptr << " ";
+        }
+};
+
+int main()
+{
+    Test t1(10);
+    Test t2(t1);
+    t2.set(20);
+    t1.print();
+    t2.print();
+    return 0;
+}
+
+Destructor:
+-----------
+1) There's only one as class could only  be destroyed in one way.
+
+class Test{
+    int x;
+    public:
+        Test(int i) : x(i){
+            cout << "Cons" << x << endl;
+        }
+        ~Test(){
+            cout << "Dest" << x << endl;
+        }
+};
+
+2) Called when end of scope is reached denoted by the {} bracket.
+3) We create our own destructors when our class has dynamically allocated memory.
+4) They are deleted in the reverse order of their creation, in a topological way.
+
