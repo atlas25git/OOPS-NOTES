@@ -1,0 +1,51 @@
+1) If a class a declares a fn friend of it, this fn can thus access all the 
+    members of the class, private/public you name it.
+    Friendship is granted not taken, not inherited, not mutual.
+2) Friend function:
+
+#include<iostream>
+using namespace std;
+
+class Employee;
+
+class Printer{
+public:
+    void printEmp(const Employee & e);  
+};
+
+class Employee{
+private:
+    int id;
+    string name;
+public:
+    friend void Printer :: printEmp(const Employee & e);
+    Employee(int i, string n) : id(i), name(n){}
+};
+
+void Printer::printEmp(const Employee & e){
+    cout << e.id << ' ' << e.name << '\n';
+}
+
+3) Friend class:
+
+class Employee;
+
+class Printer{
+public:
+    void printEmp(const Employee & e);  
+};
+
+class Employee{
+private:
+    int id;
+    string name;
+public:
+    friend class Printer;
+    Employee(int i, string n) : id(i), name(n){}
+};
+
+void Printer::printEmp(const Employee & e){
+    cout << e.id << ' ' << e.name << '\n';
+}
+
+The members of friend class have full access to the members of the befriended by class.

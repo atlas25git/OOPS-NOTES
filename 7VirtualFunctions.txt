@@ -1,0 +1,12 @@
+Virtual Functions:
+------------------
+
+1) Base class's pointer or reference can refer to derive class object.
+2) This helps in collection and management of data of all the derived classes using base class's pointer. 
+3) By default fn calls are made based on the type of base class type used.
+4) To circumvent this issue we use Virtual Functions.
+5) If we state base class's fns as virtul then specific fns according to the referred derived object would be called now.
+6) This is function overriding,  thus run time polymophism.
+7) Class contains vptr, which points to a table containing all the virtual function lists.
+8) According to particular derived class apt table is referred.
+9) We add override keyword to derived class's functions.

@@ -1,0 +1,23 @@
+Operator Overloading:
+--------------------
+1) Default assignment operator is created, which does shallow copy.
+2) Overloading not allowd for ,,::,?,sizeof
+
+class Complex{
+private:
+    int r, i;
+public:
+    Complex(int r = 0, int i = 0){
+        this->r = r;
+        this->i = i;
+    }
+    Complex operator + (const Complex &c){
+        Complex ans;
+        ans.r = this->r + c.r;
+        ans.i = this->i + c.i;
+        return ans;
+    } 
+    void print(){
+        cout << this->r << " + " << this->i << "i \n";
+    }
+};
